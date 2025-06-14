@@ -1,0 +1,20 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: salary-loan-backend
+    ports:
+      - "8000:80"
+    volumes:
+      - ./backend/app/data:/app/data
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: salary-loan-frontend
+    ports:
+      - "8501:8501"
+    depends_on:
+      - backend
+    environment:
+      - BACKEND_HOST=backend
